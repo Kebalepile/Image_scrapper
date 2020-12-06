@@ -3,8 +3,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import selenium.common.exceptions as err
+from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
+import json
+import selenium.common.exceptions as err
+import os
 
 
 class Crawler():
@@ -16,6 +19,7 @@ class Crawler():
         self.driver = webdriver.Firefox()
         self.search_engine = 'https://duckduckgo.com'
         self.delay = 10  # seconds.
+        self.target = 0
 
     def search(self, term, target):
         self.target = target
@@ -47,7 +51,7 @@ class Crawler():
 
             assert yes == True, f'Not satisfied {yes}'
 
-            self.download()
+            self.crawl_lnks()
 
         except err.NoSuchElementException as e:
             print(e)
@@ -86,5 +90,26 @@ class Crawler():
         else:
             return True
 
-    def download(self):
-        print('\t ....downloading images....')
+    def crawl_lnks(self):
+
+       
+        imgs = self.driver.find_elements_by_class_name('tile--img__img')
+        titles = self.driver.find_elements_by_class_name(
+            'tile--img__title')
+
+        scrape_links = {}
+        print(titles[0].text, imgs[0].get_attribute('src'))
+        for x, y in zip(titles, imgs):
+            if self.target != 0:
+                print(x, '\t', y)
+                scrape_links[x.text] = y.get_attribute('src')
+                self.target -= 1
+            else:
+                break
+
+        serialized_json = json.dumps(scrape_links, indent=4)
+        with open('scrape_links.json', 'w') as f:
+
+            f.write(serialized_json)
+
+        self.driver.quit()
