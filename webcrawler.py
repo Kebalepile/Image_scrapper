@@ -23,6 +23,7 @@ class Crawler():
 
     def search(self, term, target):
         self.target = target
+        self.driver.set_window_size(626, 700)
         self.driver.get(self.search_engine)
         try:
             search_bar = self.driver.find_element_by_id(
@@ -92,16 +93,15 @@ class Crawler():
 
     def crawl_lnks(self):
 
-       
         imgs = self.driver.find_elements_by_class_name('tile--img__img')
         titles = self.driver.find_elements_by_class_name(
             'tile--img__title')
 
         scrape_links = {}
-        print(titles[0].text, imgs[0].get_attribute('src'))
+
         for x, y in zip(titles, imgs):
             if self.target != 0:
-                print(x, '\t', y)
+
                 scrape_links[x.text] = y.get_attribute('src')
                 self.target -= 1
             else:
