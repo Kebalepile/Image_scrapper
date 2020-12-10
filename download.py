@@ -10,7 +10,7 @@ with open('scrape_links.json', 'r') as openfile:
 
 
 def folder_name():
-    name = input(':: Enter desired folder name: ')
+    name = input(':: Enter desired folder name, e.g egg: ')
     if len(name) > 0:
         return name
     return folder_name()
