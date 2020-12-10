@@ -13,4 +13,5 @@ you can scrape images to train a basic model.
 * add geckodriver.exe path to your envrionment variables
 * type python init_app.py
 * an terminal prompt should appear.
-*final step do what you must.
+
+**final step do what you must.
