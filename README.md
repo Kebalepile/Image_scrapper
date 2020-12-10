@@ -4,7 +4,7 @@ looking for an alternaitive image scraper that shows you potenital images to scr
 you can scrape images to train a basic model.
 
 ## Setup instruction for windows OS.
-  must have installed firfoxbroswer version 83.0 (64-bit), if not install current version     and download current version of geckodriver.exe
+  must have installed firfox broswer version 83.0 (64-bit), if not install current version   and download current version of geckodriver.exe
   
 * git clone https://github.com/Kebalepile/Image_scrapper.git
 * cd into Image scrapper folder
