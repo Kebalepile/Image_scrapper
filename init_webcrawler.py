@@ -5,7 +5,7 @@ def start():
     search_term = input(':: Enter search Term\n-> ')
     if len(search_term) > 0:
         try:
-            max_n = int(input(':: Enter max size of image to scrape -> '))
+            max_n = int(input(':: Enter max number of image to scrape -> '))
             if max_n > 0:
                 scrape(search_term, max_n)
                 return
